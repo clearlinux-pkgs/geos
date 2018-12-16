@@ -1,0 +1,3 @@
+Configure miss: if requested libstdc++ debug mode
+Configure miss: whether C++ compiler accepts -Wmissing-override -Werror
+Configure miss: whether int64_t is 64 bits
