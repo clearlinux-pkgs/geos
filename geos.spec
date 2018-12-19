@@ -4,7 +4,7 @@
 #
 Name     : geos
 Version  : 3.7.1
-Release  : 2
+Release  : 3
 URL      : https://github.com/libgeos/geos/archive/3.7.1.tar.gz
 Source0  : https://github.com/libgeos/geos/archive/3.7.1.tar.gz
 Summary  : No detailed summary available
@@ -14,6 +14,8 @@ Requires: geos-bin = %{version}-%{release}
 Requires: geos-lib = %{version}-%{release}
 Requires: geos-license = %{version}-%{release}
 BuildRequires : buildreq-cmake
+BuildRequires : python3-dev
+BuildRequires : swig
 
 %description
 C++ Template Unit Test Framework
@@ -65,8 +67,8 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1544976950
-%autogen --disable-static
+export SOURCE_DATE_EPOCH=1545240857
+%autogen --disable-static --disable-python
 make  %{?_smp_mflags}
 
 %check
@@ -77,7 +79,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1544976950
+export SOURCE_DATE_EPOCH=1545240857
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/geos
 cp COPYING %{buildroot}/usr/share/package-licenses/geos/COPYING
