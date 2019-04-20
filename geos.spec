@@ -4,7 +4,7 @@
 #
 Name     : geos
 Version  : 3.7.1
-Release  : 4
+Release  : 5
 URL      : https://github.com/libgeos/geos/archive/3.7.1.tar.gz
 Source0  : https://github.com/libgeos/geos/archive/3.7.1.tar.gz
 Summary  : No detailed summary available
