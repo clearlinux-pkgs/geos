@@ -4,7 +4,7 @@
 #
 Name     : geos
 Version  : 3.7.2
-Release  : 6
+Release  : 7
 URL      : https://github.com/libgeos/geos/archive/3.7.2/geos-3.7.2.tar.gz
 Source0  : https://github.com/libgeos/geos/archive/3.7.2/geos-3.7.2.tar.gz
 Summary  : C++ port of the Java Topology Suite
