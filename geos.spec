@@ -4,10 +4,10 @@
 #
 Name     : geos
 Version  : 3.7.2
-Release  : 7
+Release  : 8
 URL      : https://github.com/libgeos/geos/archive/3.7.2/geos-3.7.2.tar.gz
 Source0  : https://github.com/libgeos/geos/archive/3.7.2/geos-3.7.2.tar.gz
-Summary  : C++ port of the Java Topology Suite
+Summary  : No detailed summary available
 Group    : Development/Tools
 License  : BSD-3-Clause LGPL-2.1
 Requires: geos-bin = %{version}-%{release}
@@ -18,11 +18,9 @@ BuildRequires : python3-dev
 BuildRequires : swig
 
 %description
-Since version 3.0, the Python bindings are unsupported. Recommended options:
-1. Become or recruit a new maintainer.
-2. Use Shapely (http://pypi.python.org/pypi/Shapely) with Python versions 2.4 or greater.
-3. Simply call functions from libgeos_c via Python ctypes. Examples abound in the GeoDjango or Shapely code.
-See also http://trac.osgeo.org/geos/ticket/228
+To build Doxygen documentation use:
+make doxygen-html
+Take a look at example.cpp to get started.
 
 %package bin
 Summary: bin components for the geos package.
@@ -64,36 +62,38 @@ license components for the geos package.
 
 %prep
 %setup -q -n geos-3.7.2
+cd %{_builddir}/geos-3.7.2
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1556982908
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1604622699
+export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
 export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 %autogen --disable-static --disable-python
 make  %{?_smp_mflags}
 
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-make VERBOSE=1 V=1 %{?_smp_mflags} check
+make %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1556982908
+export SOURCE_DATE_EPOCH=1604622699
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/geos
-cp COPYING %{buildroot}/usr/share/package-licenses/geos/COPYING
-cp cmake/modules/COPYING-CMAKE-SCRIPTS %{buildroot}/usr/share/package-licenses/geos/cmake_modules_COPYING-CMAKE-SCRIPTS
+cp %{_builddir}/geos-3.7.2/COPYING %{buildroot}/usr/share/package-licenses/geos/01a6b4bf79aca9b556822601186afab86e8c4fbf
+cp %{_builddir}/geos-3.7.2/cmake/modules/COPYING-CMAKE-SCRIPTS %{buildroot}/usr/share/package-licenses/geos/ff3ed70db4739b3c6747c7f624fe2bad70802987
 %make_install
 
 %files
@@ -105,7 +105,7 @@ cp cmake/modules/COPYING-CMAKE-SCRIPTS %{buildroot}/usr/share/package-licenses/g
 
 %files dev
 %defattr(-,root,root,-)
-/usr/include/*.h
+/usr/include/geos.h
 /usr/include/geos/algorithm/Angle.h
 /usr/include/geos/algorithm/BoundaryNodeRule.h
 /usr/include/geos/algorithm/CGAlgorithms.h
@@ -488,6 +488,7 @@ cp cmake/modules/COPYING-CMAKE-SCRIPTS %{buildroot}/usr/share/package-licenses/g
 /usr/include/geos/util/UnsupportedOperationException.h
 /usr/include/geos/util/math.h
 /usr/include/geos/version.h
+/usr/include/geos_c.h
 
 %files lib
 %defattr(-,root,root,-)
@@ -499,5 +500,5 @@ cp cmake/modules/COPYING-CMAKE-SCRIPTS %{buildroot}/usr/share/package-licenses/g
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/geos/COPYING
-/usr/share/package-licenses/geos/cmake_modules_COPYING-CMAKE-SCRIPTS
+/usr/share/package-licenses/geos/01a6b4bf79aca9b556822601186afab86e8c4fbf
+/usr/share/package-licenses/geos/ff3ed70db4739b3c6747c7f624fe2bad70802987
