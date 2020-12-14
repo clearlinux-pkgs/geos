@@ -4,7 +4,7 @@
 #
 Name     : geos
 Version  : 3.7.2
-Release  : 8
+Release  : 9
 URL      : https://github.com/libgeos/geos/archive/3.7.2/geos-3.7.2.tar.gz
 Source0  : https://github.com/libgeos/geos/archive/3.7.2/geos-3.7.2.tar.gz
 Summary  : No detailed summary available
